@@ -1,7 +1,7 @@
-import cardsData from "./data/cards.mjs";
-import Card from "./Card.mjs";
-import Board from "./Board.mjs";
-import Player from "./Player.mjs";
+import cardsData from "../data/cards.mjs";
+import Card from "../utils/Card.mjs";
+import Board from "../utils/Board.mjs";
+import Player from "../utils/Player.mjs";
 
 const Player1 = Object.assign(
   new Player(),
@@ -21,40 +21,26 @@ let lockBoard = false;
 let turn = Player1;
 let cardsUp = 0;
 
-function showScore(Player, selector) {
-  const playerDOMWins = document.querySelector(`.${selector}-wins`);
-  playerDOMWins.innerHTML = Player.wins;
+function startGame(size) {
+  let k = 0;
+  for (let i = 0; i < Math.floor((size * size) / 2); i++) {
+    const card1 = new Card(`../data/${cardsData[k].img}`, cardsData[k].id);
+    board.addCard(card1);
+    const card2 = new Card(`../data/${cardsData[k].img}`, cardsData[k++].id);
+    board.addCard(card2);
+  }
+  // adding one card without a pair
+  if (size % 2 != 0) {
+    const card1 = new Card(`../data/${cardsData[k].img}`, cardsData[k++].id);
+    board.addCard(card1);
+  }
 
-  const playerDOMPoints = document.querySelector(`.${selector}-points`);
-  playerDOMPoints.innerHTML = Player.points;
-
-  const playerDOMlosses = document.querySelector(`.${selector}-losses`);
-  playerDOMlosses.innerHTML = Player.losses;
-
-  const playerDOMdraws = document.querySelector(`.${selector}-draws`);
-  playerDOMdraws.innerHTML = Player.draws;
+  board.shuffle();
 }
 
 function updateTurn(player) {
   const turnHtml = document.querySelector(".turn");
   turnHtml.innerHTML = `${player.name}'s turn`;
-}
-
-function startGame(size) {
-  let k = 0;
-  for (let i = 0; i < Math.floor((size * size) / 2); i++) {
-    const card1 = new Card(`./data/${cardsData[k].img}`, cardsData[k].id);
-    board.addCard(card1);
-    const card2 = new Card(`./data/${cardsData[k].img}`, cardsData[k++].id);
-    board.addCard(card2);
-  }
-  // adding one card without a pair
-  if (size % 2 != 0) {
-    const card1 = new Card(`./data/${cardsData[k].img}`, cardsData[k++].id);
-    board.addCard(card1);
-  }
-
-  board.shuffle();
 }
 
 function flipCard() {
@@ -72,6 +58,10 @@ function flipCard() {
 
   let isMatch = firstCard.id === secondCard.id;
   isMatch ? foundMatch() : unflipCards();
+}
+
+function makeClickable() {
+  cards.forEach((card) => card.addEventListener("click", flipCard));
 }
 
 function toggleTurn() {
@@ -135,8 +125,8 @@ function updateScore() {
   }
   Player2.saveData();
   Player1.saveData();
-  showScore(Player1, Player1.dataSelector);
-  showScore(Player2, Player2.dataSelector);
+  Player2.showScore();
+  Player1.showScore();
 }
 
 function declare(player = null, result = null) {
@@ -156,41 +146,36 @@ function gameOver() {
 function resetGame() {
   Player1.points = 0;
   Player2.points = 0;
+  firstCard = null;
+  secondCard = null;
   cardsUp = 0;
   lockBoard = false;
 
   board.allCards.forEach(({ element }) => {
-    setTimeout(() => {
-      element.classList.remove("flip");
-    });
+    element.classList.remove("flip");
   });
-  showScore(Player1, Player1.dataSelector);
-  showScore(Player2, Player2.dataSelector);
-  turn = Player1;
-  board.allCards.forEach(({ element }) => element.remove());
-  board.allCards = [];
-  updateTurn(turn);
-  startGame(size);
-  cards = document.querySelectorAll(".card");
-  makeClickable();
+
+  Player1.showScore();
+  Player2.showScore();
+  setTimeout(() => {
+    turn = Player1;
+    board.allCards.forEach(({ element }) => element.remove());
+    board.allCards = [];
+    updateTurn(turn);
+    startGame(size);
+    cards = document.querySelectorAll(".card");
+    makeClickable();
+  }, 300);
 }
-
-const player1H3 = document.querySelector(".player1-h3");
-player1H3.innerHTML = Player1.name;
-
-const player2H3 = document.querySelector(".player2-h3");
-player2H3.innerHTML = Player2.name;
 
 document.querySelector(".reset").addEventListener("click", resetGame);
 
+Player1.showName();
+Player2.showName();
 updateTurn(turn);
-showScore(Player1, Player1.dataSelector);
-showScore(Player2, Player2.dataSelector);
+Player1.showScore();
+Player2.showScore();
 startGame(size);
+
 let cards = document.querySelectorAll(".card");
-
-function makeClickable() {
-  cards.forEach((card) => card.addEventListener("click", flipCard));
-}
-
 makeClickable();

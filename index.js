@@ -1,6 +1,5 @@
-import Player from "./Player.mjs";
+import Player from "./utils/Player.mjs";
 
-const infoWrapper = document.querySelector(".info-wraper");
 const submit = document.querySelector(".submit");
 const inputs = document.querySelectorAll(".input-text");
 const inputsRadio = document.getElementsByName("size");
@@ -24,5 +23,5 @@ submit.addEventListener("click", () => {
   stoarge.setItem("player1", JSON.stringify(Player1));
   stoarge.setItem("player2", JSON.stringify(Player2));
   console.log(Player1);
-  location.href = "game.html";
+  location.href = "./pages/game.html";
 });
