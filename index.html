@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <title>Game</title>
+  </head>
+  <body>
+    <div class="root">
+      <svg width="1146" height="712" viewBox="0 0 1146 712" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18.1057 261.061C-27.0422 413.087 21.6057 478.061 62.1057 553.061C143.101 725.561 381.501 612.4 589.101 660C848.601 719.5 1061.25 778.428 1127.1 524C1171.1 354 1131.6 282.5 1049.1 188C966.601 93.5 895.101 112 759.101 78C574.604 31.876 505.101 -10 375.106 3.56072C226.413 19.072 89.1006 22.0001 18.1057 261.061Z" fill="#505DD1"/>
+        </svg>        
+      <div class="info-wraper">
+        <h1>Memory Game</h1>
+        <div class="labelWrapper">
+          <label class="label-text" for="namePlayer1">
+            <span class="label-title">Player1</span>
+            <input class="input-text" onfocus="this.value=''" type="text" value="Enter player 1 name" />
+          </label>
+          <label class="label-text"  for="namePlayer2"></label>
+            <span class="label-title">Player2</span>
+            <input class="input-text" onfocus="this.value=''" type="text" value="Enter player 2 name" />
+          </label>
+          <span class="label-title">Select board size:</span>
+          <div class="radioWrapper">
+            <span class="input-label">
+            <input class="input-radio"  type="radio" id="3" name="size" value="3" checked="checked">3X3</input>
+           
+            
+          </span>
+          <span class="input-label">
+            <input class="input-radio" type="radio" id="4" name="size" value="4">4x4</input>
+            </span>
+          </div>
+        </div>
+        <button class="submit" type="submit">Lets Play!</button>
+      </div>
+  
+    </div>
+    <script type="module" src="index.js"></script>
+    <script type="module" src="Player.mjs"></script>
+  </body>
+</html>

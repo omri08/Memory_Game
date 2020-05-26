@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="game.css" />
+    <title>Lets Play!</title>
+  </head>
+  <body>
+    <div class="root">
+      <svg
+        width="1146"
+        height="712"
+        viewBox="0 0 1146 712"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M18.1057 261.061C-27.0422 413.087 21.6057 478.061 62.1057 553.061C143.101 725.561 381.501 612.4 589.101 660C848.601 719.5 1061.25 778.428 1127.1 524C1171.1 354 1131.6 282.5 1049.1 188C966.601 93.5 895.101 112 759.101 78C574.604 31.876 505.101 -10 375.106 3.56072C226.413 19.072 89.1006 22.0001 18.1057 261.061Z"
+          fill="#505DD1"
+        />
+      </svg>
+      <div class="game-wrapper">
+        <div class="game-info">
+          <div class="player player1-info">
+            <h3 class="player1-h3"></h3>
+            <span class="score-info"
+              >Wins:<span class="score player1-wins"></span
+            ></span>
+            <span class="score-info"
+              >Losses:<span class="score player1-losses"></span
+            ></span>
+            <span class="score-info"
+              >Draws:<span class="score player1-draws"></span
+            ></span>
+            <span class="score-info"
+              >Points:<span class="score player1-points"></span
+            ></span>
+          </div>
+          <div class="turnAndButton">
+            <span class="turn"> </span>
+            <button class="reset">RESET GAME</button>
+          </div>
+          <div class="player player2-info">
+            <h3 class="player2-h3"></h3>
+            <span class="score-info"
+              >Wins:<span class="score player2-wins"></span
+            ></span>
+            <span class="score-info"
+              >Losses:<span class="score player2-losses"></span
+            ></span>
+            <span class="score-info"
+              >Draws:<span class="score player2-draws"></span
+            ></span>
+            <span class="score-info"
+              >Points:<span class="score player2-points"></span
+            ></span>
+          </div>
+        </div>
+        <div class="board"></div>
+      </div>
+    </div>
+  </body>
+  <script type="module" src="game.js"></script>
+  <script type="module" src="./data/cards.mjs"></script>
+  <script type="module" src="Card.mjs"></script>
+  <script type="module" src="Board.mjs"></script>
+  <script type="module" src="Player.mjs"></script>
+</html>
